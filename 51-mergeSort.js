@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 function mergeSort(arr) {
   if (arr.length <= 1) {
     return arr;
@@ -13,9 +15,8 @@ function mergeSort(arr) {
 function merge(left, right) {
   let result = [];
 
-  // left and right both not 0
   while (left.length && right.length) {
-    if (left[0] < right[0]) {
+    if (left[0] <= right[0]) {
       result.push(left.shift());
     } else {
       result.push(right.shift());
@@ -31,7 +32,7 @@ function merge(left, right) {
   return result;
 }
 
-const array = prompt('input Array')
+const array = prompt('배열을 입력하세요')
   .split(' ')
   .map((n) => parseInt(n, 10));
 
