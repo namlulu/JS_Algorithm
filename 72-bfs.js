@@ -15,7 +15,7 @@ function bfs(graph, start) {
     let n = queue.shift();
     if (!visited.includes(n)) {
       visited.push(n);
-      let sub = graph[n].filter((x) => !visited.includes(x));
+      let sub = graph[n].filter((element) => !visited.includes(element));
       for (let i of sub) {
         queue.push(i);
       }
