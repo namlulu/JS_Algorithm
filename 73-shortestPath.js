@@ -1,3 +1,4 @@
+// BFS Count if ShortestPath between of thw edges.
 const prompt = require('prompt-sync')();
 
 const graph = {
@@ -21,22 +22,22 @@ function solution() {
   let count = -1;
 
   while (queue.length !== 0) {
-    count += 1;
-
+    count++;
     let size = queue.length;
-
+    //
     for (let i = 0; i < size; i++) {
-      let node = queue.shift();
+      const node = queue.shift();
       if (node === end) {
         return count;
       }
-
-      for (let next_node in graph[node]) {
-        if (!visited.includes(graph[node][next_node])) {
-          visited.push(graph[node][next_node]);
-          queue.push(graph[node][next_node]);
+      //
+      for (let n of graph[node]) {
+        if (!visited.includes(n)) {
+          visited.push(n);
+          queue.push(n);
         }
       }
+      //
     }
   }
 }

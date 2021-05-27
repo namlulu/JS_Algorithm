@@ -12,12 +12,12 @@ function bfs(graph, start) {
   let queue = [start];
 
   while (queue.length !== 0) {
-    let n = queue.shift();
-    if (!visited.includes(n)) {
-      visited.push(n);
-      let sub = graph[n].filter((element) => !visited.includes(element));
-      for (let i of sub) {
-        queue.push(i);
+    const element = queue.shift();
+    if (!visited.includes(element)) {
+      visited.push(element);
+      const subNodes = graph[element].filter((item) => !visited.includes(item));
+      for (let node of subNodes) {
+        queue.push(node);
       }
     }
   }

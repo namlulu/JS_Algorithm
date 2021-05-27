@@ -12,17 +12,15 @@ function dfs(graph, start) {
   let stack = [start];
 
   while (stack.length !== 0) {
-    let node = stack.pop();
-    if (!visited.includes(node)) {
-      visited.push(node);
-    }
-
-    let subNode = graph[node]
-      .filter((element) => !visited.includes(element))
-      .reverse();
-
-    for (let i of subNode) {
-      stack.push(i);
+    const element = stack.pop();
+    if (!visited.includes(element)) {
+      visited.push(element);
+      const subNode = graph[element]
+        .filter((item) => !visited.includes(item))
+        .reverse();
+      for (let i of subNode) {
+        stack.push(i);
+      }
     }
   }
   return visited;

@@ -1,3 +1,4 @@
+// Amoung BFS, the Largest one is lonegest one.
 const graph = {
   1: [2, 3, 4],
   2: [1, 3, 4, 5, 6],
@@ -16,11 +17,9 @@ let queue = [start];
 let visited = [];
 
 function solution(input_queue, visited) {
-  // initialized
-  let node = input_queue[input_queue.length - 1];
+  let node = input_queue[0];
   let length = 0;
 
-  // recursive part
   if (node === end) {
     return visited.length;
   }
@@ -31,16 +30,17 @@ function solution(input_queue, visited) {
     visited.push(node);
   }
 
-  // caller
-  let max = [];
+  let maxArray = [];
 
-  for (let next_node in graph[node]) {
-    input_queue.push(graph[node][next_node]);
-    max.push(length, solution(input_queue, visited));
-    length = Math.max(...max);
-    input_queue.pop();
+  for (let n in graph[node]) {
+    input_queue.push(graph[node][n]);
+
+    maxArray.push(length, solution(input_queue, visited));
+    length = Math.max(...maxArray);
+
+    input_queue.shift();
   }
-
+  console.log(maxArray);
   return length;
 }
 
