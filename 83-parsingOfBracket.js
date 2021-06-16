@@ -28,7 +28,7 @@ function math(e) {
         return false;
       } else {
         let value = obj[input[i]];
-        if (value != stack.pop()) {
+        if (value !== stack.pop()) {
           return false;
         }
       }
