@@ -1,9 +1,9 @@
 const prompt = require('prompt-sync')();
 
 const inputString = prompt('input String: ').split(',');
-const inputNumber = parseInt(prompt(''), 10);
+const inputNumber = parseInt(prompt('input Number: '), 10);
 
-function solution(arr, count) {
+function 조합(arr, count) {
   let comb = [];
   const recursive = (pre, array) => {
     for (let i = 0; i < array.length; i++) {
@@ -17,4 +17,4 @@ function solution(arr, count) {
   console.log(comb.filter((element) => element.length === count));
 }
 
-solution(inputString, inputNumber);
+조합(inputString, inputNumber);
