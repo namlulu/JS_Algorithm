@@ -26,4 +26,3 @@ function solution(numbers) {
 
   return answer;
 }
-console.log(solution([2, 7]));

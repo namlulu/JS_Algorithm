@@ -59,12 +59,15 @@ class LinkedList {
     if (nodeToDelete === this.head && nodeToDelete === this.tail) {
       this.head = null;
       this.tail = null;
+      //
     } else if (nodeToDelete === this.head) {
       this.head = this.head.next;
       this.head.prev = null;
-    } else if ((nodeToDelete === this, this)) {
+      //
+    } else if (nodeToDelete === this.tail) {
       this.tail = this.tail.prev;
       this.tail.next = null;
+      //
     } else {
       nodeToDelete.prev.next = nodeToDelete.next;
       nodeToDelete.next.prev = nodeToDelete.prev;
@@ -90,13 +93,44 @@ class HashTable {
     return str;
   }
 
-  hash(key) {
+  _hash(key) {
     return (
       sha256('영훈').words.reduce((pre, cur) => pre + cur) % this._capacity
     );
   }
 
-  lookUpValue(key) {}
+  _getLinkedListForKey(key) {
+    let hashIndex = this._hash(key);
+    return this._table[hashIndex];
+  }
 
-  insert(key, value) {}
+  _lookUpNode(key) {
+    let linkedList = this._getLinkedListForKey(key);
+    return linkedList.findfindNodeWithKey(key);
+  }
+
+  lookUpValue(key) {
+    return this._lookUpNode(key).value;
+  }
+
+  insert(key, value) {
+    let node = this._lookUpNode(key);
+
+    if (node) {
+      node.value = value;
+    } else {
+      let linkedList = this._getLinkedListForKey(key);
+      linkedList.push(key, value);
+    }
+  }
+
+  deleteByKey(key) {
+    let node = this._lookUpNode(key);
+    let linkedList = this._getLinkedListForKey(key);
+
+    if (node) {
+      linkedList.delete(node);
+      return node;
+    }
+  }
 }

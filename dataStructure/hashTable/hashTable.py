@@ -66,7 +66,7 @@ class HashTable:
     def __init__(self, capacity):
         self._capacity = capacity
         self._table = [LinkedList() for _ in range(self._capacity)]
-        
+
     def __str__(self):
         res_str = ""
 
@@ -78,3 +78,58 @@ class HashTable:
     def _hash_function(self, key):
         return hash(key) % self._capacity
 
+
+    def _get_linked_list_for_key(self, key):
+        hashed_index = self._hash_function(key)
+        return self._table[hashed_index]
+
+
+    def _look_up_node(self, key):
+        linked_list = self._get_linked_list_for_key(key)
+        return linked_list.find_node_with_key(key)
+
+    def look_up_value(self, key):
+        return self._look_up_node(key).value
+
+            
+    def insert(self, key, value):
+        existing_node = self._look_up_node(key)
+
+        if existing_node is not None:
+            existing_node.value = value
+        else:
+            linked_list = self._get_linked_list_for_key(key)
+            linked_list.append(key, value)
+
+    def delete_by_key(self, key):
+         existing_node = self._look_up_node(key)
+         
+         if existing_node is not None:
+            linked_list = self._get_linked_list_for_key(key)
+            linked_list.delete(existing_node)
+            return existing_node
+
+test_scores = HashTable(50)  # 시험 점수를 담을 해시 테이블 인스턴스 생성
+
+# 여러 학생들 이름과 시험 점수 삽입
+test_scores.insert("현승", 85)
+test_scores.insert("영훈", 90)
+test_scores.insert("동욱", 87)
+test_scores.insert("지웅", 99)
+test_scores.insert("신의", 88)
+test_scores.insert("규식", 97)
+test_scores.insert("태호", 90)
+
+print(test_scores)
+
+# key인 이름으로 특정 학생 시험 점수 검색
+print(test_scores.look_up_value("현승"))
+print(test_scores.look_up_value("태호"))
+print(test_scores.look_up_value("영훈"))
+
+# 학생들 시험 점수 수정
+test_scores.insert("현승", 10)
+test_scores.insert("태호", 20)
+test_scores.insert("영훈", 30)
+
+print(test_scores)
