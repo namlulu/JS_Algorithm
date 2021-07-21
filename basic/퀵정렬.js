@@ -16,11 +16,7 @@ function quick(arr) {
       groupTwo.push(arr[i]);
     }
   }
-
-  console.log(groupOne);
-  console.log(groupTwo);
-  console.log(pivot + '\n');
-
+  
   return quick(groupOne).concat(pivot, quick(groupTwo));
 }
 
