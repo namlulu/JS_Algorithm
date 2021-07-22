@@ -1,28 +1,11 @@
 function solution(numbers) {
-  let answer = [];
-
-  numbers.forEach((item) => {
-    let twoNumber = '0' + item.toString(2);
-    const lastIdx = twoNumber.length - 1;
-
-    if (twoNumber[lastIdx] === '0') {
-      answer.push(item + 1);
-    } else {
-      for (let i = lastIdx; i >= 0; i--) {
-        if (twoNumber[i] === '0') {
-          answer.push(
-            parseInt(
-              twoNumber.substring(0, i) +
-                '10' +
-                twoNumber.substring(i + 2, lastIdx + 1),
-              2
-            )
-          );
-          break;
-        }
-      }
-    }
-  });
-
-  return answer;
+  const answer = numbers
+                        .map((v) => v.toString())
+                        .sort((a, b) => (b + a) - (a + b))
+                        .join('')
+  return answer
 }
+
+console.log(solution([6, 10, 2]));
+console.log(solution([3, 30, 34, 5, 9]));
+console.log(solution([0, 0, 0, 0]));
