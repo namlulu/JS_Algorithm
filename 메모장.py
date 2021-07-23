@@ -1,11 +1,20 @@
 import sys
 
-a, b = map(int, sys.stdin.readline().split())
-c = list(map(int, sys.stdin.readline().split()))
-answer = ""
+user_input = int(sys.stdin.readline())
+store = user_input
+temp = 0
+count = 0
 
-for i in range(len(c)):
-    if c[i] < b:
-        answer = answer + f"{c[i]} "
+while True:
+    temp = store // 10 + store % 10
+    if temp < 10:
+        store = store % 10 * 10 + temp
+    else:
+        store = store % 10 * 10 + temp % 10
+    
+    count += 1
 
-print(answer.strip())
+    if store == user_input:
+        break
+
+print(count)
