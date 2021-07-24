@@ -1,20 +1,12 @@
+from functools import reduce
 import sys
 
 user_input = int(sys.stdin.readline())
-store = user_input
-temp = 0
-count = 0
+array = list(map(int, sys.stdin.readline().split()))
 
-while True:
-    temp = store // 10 + store % 10
-    if temp < 10:
-        store = store % 10 * 10 + temp
-    else:
-        store = store % 10 * 10 + temp % 10
-    
-    count += 1
+max = max(array)
+manipulate_list = list(map(lambda x: x / max * 100, array))
 
-    if store == user_input:
-        break
+answer = reduce(lambda acc, cur: acc + cur, manipulate_list, 0) / len(manipulate_list)
 
-print(count)
+print(answer)
