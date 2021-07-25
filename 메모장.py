@@ -1,12 +1,20 @@
-from functools import reduce
 import sys
 
-user_input = int(sys.stdin.readline())
-array = list(map(int, sys.stdin.readline().split()))
+iterator = int(sys.stdin.readline())
 
-max = max(array)
-manipulate_list = list(map(lambda x: x / max * 100, array))
+for _ in range(iterator):
 
-answer = reduce(lambda acc, cur: acc + cur, manipulate_list, 0) / len(manipulate_list)
+    user_input = list(map(int, sys.stdin.readline().split()))
+    number_students = user_input[0]
 
-print(answer)
+    scores = user_input[1:]
+    avg_scores = sum(scores) / len(scores)
+
+    count = 0
+    for score in scores:
+        if score > avg_scores:
+            count += 1
+    
+    print("{0:.3f}%" .format(count / len(scores) * 100))
+        
+
